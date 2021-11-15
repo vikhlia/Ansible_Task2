@@ -1,0 +1,35 @@
+---
+- name: create users
+  hosts: [nodes]
+  user: ansible
+  become: yes
+  become_method: sudo
+  become_user: root
+  vars_files:
+    - secrets.yml
+ 
+  tasks:
+    - name: create Alice
+      user:   
+        name: Alice
+        comment: alice@example.com
+        home: /home/Alice
+        password: "{{ pwhash1 }}"
+        state: present
+    - name: create Bob
+      user:
+        name: Bob
+        comment: bob@example.com
+        home: /home/Bob
+        password: "{{ pwhash2 }}"
+        state: present
+    - name: create Carol
+      user:
+        name: Carol
+        comment: carol@example.com
+        home: /home/Carol
+        password: "{{ pwhash3 }}"
+        state: present
+...
+
+         
